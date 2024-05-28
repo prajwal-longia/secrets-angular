@@ -1,0 +1,40 @@
+<app-header></app-header>
+    <br>
+    <div class="main-post" *ngIf="postId">
+    <div class="header">
+        <h1>{{post.title}}</h1>
+    </div>
+    <div class="story-content">
+        <p>{{post.content}}</p>
+    </div>
+    <br>
+    <div>
+        <div class="vote-btn vote-btn-main">
+            <button class="up-btn" type="button" (click)="onUpvote()"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg></button>
+            <button class="down-btn" type="button" (click)="onDownvote()"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg></button>
+            <p class="likes" >{{postLikes}}</p>
+            <!-- <button type="submit" class="submit-btn" (click)="onDeletePost()">Delete</button> --> 
+</div>
+        </div>
+    <div class="comment-container">
+        <div class="header sub-header">
+            <h3>Comments</h3>
+        </div>
+        <br>
+        <div class="comment-arr">
+            <div class="comment" *ngFor="let comm of comment.cmnts">
+                <p>{{comm}}</p>
+            </div>
+        </div>
+        <div class="comment-box">
+            <input type="text" [(ngModel)]="enteredComment" (keydown.enter)="onAddComment()">
+            <button type="submit" class="submit-btn" (click)="onAddComment()">Submit</button>
+        </div>
+    </div>
+    </div>
+    <div class="main-post" *ngIf="!postId">
+        <div class="header">
+            <h1>Post Not Found</h1>
+        </div>
+    </div>
+<app-footer></app-footer>

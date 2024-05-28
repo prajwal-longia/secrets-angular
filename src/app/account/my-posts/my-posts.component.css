@@ -1,0 +1,41 @@
+.del-btn {
+    width: 50%;
+    border: none;
+    background-color: #a12d2d;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(240, 233, 233);
+    transition: 0.5s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 15px;
+  }
+  
+  .del-btn:hover {
+    background-color: #8d5e5e;
+  }
+
+  .edit-btn {
+    width: 40%;
+    border: none;
+    background-color: #0e0f0f;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(240, 233, 233);
+    transition: 0.5s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 15px;
+  }
+  
+  .edit-btn:hover {
+    background-color: #393b3b;
+  }
+
+  .el-btn{
+    display: flex;
+    margin-left: auto;
+    flex-direction: row ;
+  }

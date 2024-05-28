@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<br>
+<div class="header">
+    <h1>Compose</h1>
+</div>
+    <div class="form-content">
+      <div class="contact-form">
+    <form class="submit-form" (submit)="onAddPost(composeForm)" #composeForm="ngForm" >
+      <div class="form-group compose">
+        <div class="form-element">
+        <input class="form-control" type="text" name="title" placeholder="Title" ngModel>
+      </div>
+        <div class="form-element">
+        <textarea class="form-control" name="content" rows="5" cols="30" placeholder="Post" ngModel></textarea>
+      </div>
+      <button class="submit-btn" type="submit" name="button" value="submit">Publish</button>
+      </div>
+    </form>
+    </div>
+      
+   
+  </div>
+
+  <app-footer></app-footer>

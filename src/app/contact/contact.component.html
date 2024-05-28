@@ -1,0 +1,26 @@
+<app-header></app-header>
+<br>
+<div class="shrink-container">
+<div class="header">
+    <h1>Contact</h1>
+    <br>
+    <p>{{ contactContent }}</p>
+</div>
+</div>
+<div class="form-content">
+    <div class="contact-form">
+    <form (submit)="onAddQuery(contactForm)" #contactForm="ngForm">
+        <div class="form-element">
+            <input name="name" placeholder="Name" ngModel/>
+        </div>
+        <div class="form-element">
+            <input name="email" placeholder="Email" ngModel/>
+        </div>
+        <div class="form-element">
+            <textarea name="query" placeholder="Write Your Message" ngModel></textarea>
+        </div>
+        <button class="submit-btn" type="submit" >Submit</button>
+    </form>
+</div>
+</div>
+<app-footer></app-footer>
