@@ -3,10 +3,10 @@
     <div class="login-box">
       <h1>Login</h1>
       <br>
-      <form #loginForm="ngForm">
-        <input type="text" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
-        <input type="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
-        <button type="submit" id="login-button" [routerLink]="['/home']">Login</button>
+      <form #loginForm="ngForm" (submit)="onLogin(loginForm)">
+        <input type="text" name="username" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
+        <input type="password" name="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
+        <button type="submit" id="login-button" >Login</button>
       </form>
     </div>
 <app-footer></app-footer>

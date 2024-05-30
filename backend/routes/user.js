@@ -31,6 +31,7 @@ router.post("/login", (req,res,next) => {
     let fetchedUser;
     User.findOne({username: req.body.username})
     .then(user => {
+        console.log(user);
         if (!user){
             return res.status(401).json({
                 message: "Auth Failed"
@@ -45,8 +46,12 @@ router.post("/login", (req,res,next) => {
                 message: "Auth Failed"
             });
         }
-        const token = jwt.sign({username: fetchedUser.username, userId: fetchedUser._id}, 'this_is_the_hash', {expiresIn: "1h"});
-
+        const token = jwt.sign({
+            username: fetchedUser.username,
+            userId: fetchedUser._id}, 
+            'this_is_the_hash', 
+            {expiresIn: "1h"});
+        res.status(200).json({token: token});
     })
     .catch(err => {
         return res.status(401).json({
