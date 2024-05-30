@@ -4,11 +4,11 @@
       <h1>Signup</h1>
       <br>
       <form>
-        <input type="text" placeholder="Username" id="login-input">
-        <input type="email" placeholder="Email" id="login-input">
-        <input type="password" placeholder="Password" id="login-input">
-        <input type="repassword" placeholder="Retype Password" id="login-input">
-        <button type="submit" id="login-button">Login</button>
+        <input type="text" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
+        <input type="email" placeholder="Email" ngModel id="login-input" #emailInput="ngModel" required email>
+        <input type="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
+        <input type="password" placeholder="Retype Password" ngModel id="login-input" #repassInput="ngModel" required>
+        <button type="submit" id="login-button">Signup</button>
       </form>
     </div>
 <app-footer></app-footer>
