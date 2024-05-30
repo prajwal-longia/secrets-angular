@@ -5,8 +5,7 @@ const bcrypt = require("bcrypt");
 
 
 router.post("/signup", (req,res) => {
-    bcrypt.hash(req.body.password, 10)
-    .then(hash => {
+    bcrypt.hash(req.body.password, 10).then(hash => {
         const user = new User({
             email: req.body.email,
             username: req.body.username,

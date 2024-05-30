@@ -13,8 +13,8 @@ export class AuthService {
             username: username,
             password: password
         };
-
-        this.http.post("http://localhost:3000/user/signup", authData)
+        console.log(authData);
+        this.http.post<{ message: string, result: any }>("http://localhost:3000/user/signup", authData)
             .subscribe(response => {
                 console.log(response);
             });
