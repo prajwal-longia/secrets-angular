@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AuthData } from "./auth-data.model";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
 
-    constructor(public http: HttpClient) { }
+    constructor(public http: HttpClient, public router:Router) { }
 
     createUser(email: string, username: string, password: string) {
         const authData: AuthData = {
@@ -17,6 +18,7 @@ export class AuthService {
         this.http.post<{ message: string, result: any }>("http://localhost:3000/user/signup", authData)
             .subscribe(response => {
                 console.log(response);
+                this.router.navigate(["/login"])
             });
     }
 
