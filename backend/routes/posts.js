@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
+const checkAuth = require("../middleware/check-auth");
 
-router.get("", (req,res) => {
+router.get("", checkAuth, (req,res) => {
     Post.find().then((documents) => {
         res.status(200).json({message: "Successful", posts: documents})
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id",  checkAuth, (req, res) => {
     Post.findById(req.params.id).then((post) => {
         if(post) {
             res.status(200).json(post);
@@ -18,7 +19,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("", (req,res) => {
+router.post("", checkAuth, (req,res) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
@@ -30,7 +31,7 @@ router.post("", (req,res) => {
     res.status(200).json({message: "Post Added!!", _id: post._id});
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id",  checkAuth, (req, res) => {
     const post = new Post({
         _id: req.body._id,
         title: req.body.title,
@@ -43,7 +44,7 @@ router.put("/:id", (req, res) => {
     console.log(post);
 });
 
-router.patch("/:id", (req, res) => {
+router.patch("/:id",  checkAuth, (req, res) => {
     const newLike = req.body.likes;
     Post.updateOne({_id: req.params.id}, [
         { $set: { likes: newLike} },
@@ -52,7 +53,7 @@ router.patch("/:id", (req, res) => {
     });
 });
 
-router.delete("", (req, res) => {
+router.delete("",  checkAuth, (req, res) => {
     const id = req.body._id;
     Post.deleteOne({_id: id }).then((result) => {
         res.status(200).json({message: "Post Deleted"});

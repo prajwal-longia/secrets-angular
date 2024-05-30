@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
+const checkAuth = require("../middleware/check-auth");
 
-router.get("/:id", (req, res) => {
+router.get("/:id",  checkAuth, (req, res) => {
     Comment.findOne({story_id: req.params.id}).then((comment) => {
         if(comment){
             res.status(200).json(comment);
@@ -12,7 +13,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("", (req,res) => {
+router.post("",  checkAuth, (req,res) => {
     const comment =  new Comment({
         story_id: req.body._id,
         cmnt_cnt: 0,
@@ -23,7 +24,7 @@ router.post("", (req,res) => {
     res.status(200).json({message: "Comment Array Created!"});
 });
 
-router.patch("/:id", (req,res) => {
+router.patch("/:id",  checkAuth, (req,res) => {
     const newComment = req.body.comment;
     Comment.updateOne(
         {story_id: req.params.id},
@@ -33,7 +34,7 @@ router.patch("/:id", (req,res) => {
     });
 });
 
-router.delete("", (req, res) => {
+router.delete("",  checkAuth, (req, res) => {
     const id = req.body._id;
     console.log(id);
     Comment.deleteOne({story_id: id}).then((result) => {
