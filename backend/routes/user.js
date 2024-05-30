@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/user");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 
 router.post("/signup", (req,res) => {
@@ -22,6 +23,34 @@ router.post("/signup", (req,res) => {
             res.status(500).json({
                 err: err
             });
+        });
+    });
+});
+
+router.post("/login", (req,res,next) => {
+    let fetchedUser;
+    User.findOne({username: req.body.username})
+    .then(user => {
+        if (!user){
+            return res.status(401).json({
+                message: "Auth Failed"
+            });
+        }
+        fetchedUser = user;
+        return bcrypt.compare(req.body.password, user.password);
+    })
+    .then(result => {
+        if (!result) {
+            return res.status(401).json({
+                message: "Auth Failed"
+            });
+        }
+        const token = jwt.sign({username: fetchedUser.username, userId: fetchedUser._id}, 'this_is_the_hash', {expiresIn: "1h"});
+
+    })
+    .catch(err => {
+        return res.status(401).json({
+            message: "Auth Failed"
         });
     });
 });
