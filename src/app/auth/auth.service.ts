@@ -7,12 +7,16 @@ import { Subject, tap } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class AuthService {
     private token: string;
-
+    private authStatusListener = new Subject<boolean>();
 
     constructor(public http: HttpClient, public router: Router) { }
 
     getToken() {
         return this.token;
+    }
+
+    getAuthStatusListener() {
+        return this.authStatusListener.asObservable();
     }
 
     createUser(email: string, username: string, password: string) {
@@ -33,7 +37,10 @@ export class AuthService {
         const authData = { username: username, password: password };
         this.http.post<{ token: string }>("http://localhost:3000/user/login", authData)
             .subscribe(response => {
-                this.token = response.token;
+                const token = response.token;
+                this.token = token;
+                this.authStatusListener.next(true);
+                this.router.navigate(['/home'])
                 console.log(response);
             })
     }

@@ -5,7 +5,7 @@
       <li id="compose" class="hideOnMobile"><a href="/compose">COMPOSE</a></li>
       <li id="about" class="hideOnMobile"><a href="/about">ABOUT ME</a></li>
       <li id="contact" class="hideOnMobile"><a href="/contact">CONTACT US</a></li>
-      <li id="account" class="hideOnMobile"><a href="/">MY ACCOUNT</a>
+      <li id="account" class="hideOnMobile" *ngIf="userIsAuthenticated"><a href="/">MY ACCOUNT</a>
         <!-- <ul class=".submenu">
           <li>MY POSTS</li>
           <li>NOTIFICATIONS</li>
@@ -20,6 +20,6 @@
       <li id="compose" ><a href="/compose">COMPOSE</a></li>
       <li id="about"><a href="/about">ABOUT ME</a></li>
       <li id="contact"><a href="/contact">CONTACT US</a></li>
-      <li id="account"><a href="/">MY ACCOUNT</a></li>
+      <li id="account" *ngIf="userIsAuthenticated"><a href="/" >MY ACCOUNT</a></li>
     </ul>
 </nav>  
