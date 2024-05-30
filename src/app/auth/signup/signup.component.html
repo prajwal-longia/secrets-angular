@@ -4,10 +4,10 @@
       <h1>Signup</h1>
       <br>
       <form #signupForm="ngForm" (submit)="onSignup(signupForm)">
-        <input type="text" name="username" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
-        <input type="email" name="email" placeholder="Email" ngModel id="login-input" #emailInput="ngModel" required email>
-        <input type="password" name="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
-        <input type="password" name="password" placeholder="Retype Password" ngModel id="login-input" #repassInput="ngModel" required>
+        <input type="text" name="username" placeholder="Username" ngModel #usernameInput="ngModel" required>
+        <input type="email" name="email" placeholder="Email" ngModel #emailInput="ngModel" required email>
+        <input type="password" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required>
+        <input type="password" name="password" placeholder="Retype Password" ngModel #repassInput="ngModel" required>
         <button type="submit" id="login-button">Signup</button>
       </form>
     </div>

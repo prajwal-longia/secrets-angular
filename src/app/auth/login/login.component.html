@@ -4,8 +4,8 @@
       <h1>Login</h1>
       <br>
       <form #loginForm="ngForm" (submit)="onLogin(loginForm)">
-        <input type="text" name="username" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
-        <input type="password" name="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
+        <input type="text" name="username" placeholder="Username" ngModel #usernameInput="ngModel" required>
+        <input type="password" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required>
         <button type="submit" id="login-button" >Login</button>
       </form>
     </div>
