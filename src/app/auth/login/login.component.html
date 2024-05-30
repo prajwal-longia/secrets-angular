@@ -1,1 +1,12 @@
-<p>login works!</p>
+<app-intro-nav></app-intro-nav>
+<br>
+    <div class="login-box">
+      <h1>Login</h1>
+      <br>
+      <form #loginForm="ngForm">
+        <input type="text" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
+        <input type="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>
+        <button type="submit" id="login-button">Login</button>
+      </form>
+    </div>
+<app-footer></app-footer>

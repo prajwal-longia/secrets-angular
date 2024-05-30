@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './home/post/post.component';
 import { EditPostComponent } from './home/edit-post/edit-post.component';
 import { MyPostsComponent } from './account/my-posts/my-posts.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [{
   path: 'compose',
@@ -32,6 +34,14 @@ const routes: Routes = [{
 {
   path: 'edit/:postId',
   component: EditPostComponent
+},
+{
+  path: 'signup',
+  component: SignupComponent
+},
+{
+  path: 'login',
+  component: LoginComponent
 },
 {
   path: 'home',
