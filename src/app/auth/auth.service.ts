@@ -6,8 +6,14 @@ import { Subject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
+    private token: string;
+
 
     constructor(public http: HttpClient, public router: Router) { }
+
+    getToken() {
+        return this.token;
+    }
 
     createUser(email: string, username: string, password: string) {
         const authData: AuthData = {
@@ -25,9 +31,10 @@ export class AuthService {
 
     loginUser(username: string, password: string) {
         const authData = { username: username, password: password };
-        this.http.post("http://localhost:3000/user/login", authData)
+        this.http.post<{ token: string }>("http://localhost:3000/user/login", authData)
             .subscribe(response => {
                 console.log(response);
+                this.token = response.token;
             })
     }
 

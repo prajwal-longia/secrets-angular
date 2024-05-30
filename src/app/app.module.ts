@@ -10,7 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { DefaultComponent } from './default/default.component';
 import { AboutComponent } from './about/about.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './home/post/post.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EditPostComponent } from './home/edit-post/edit-post.component';
@@ -18,6 +18,7 @@ import { MyPostsComponent } from './account/my-posts/my-posts.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { SignupComponent } from './auth/signup/signup.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
