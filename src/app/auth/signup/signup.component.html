@@ -3,7 +3,7 @@
     <div class="login-box">
       <h1>Signup</h1>
       <br>
-      <form>
+      <form #signupForm="ngForm" (submit)="onSignup(signupForm)">
         <input type="text" placeholder="Username" ngModel id="login-input" #usernameInput="ngModel" required>
         <input type="email" placeholder="Email" ngModel id="login-input" #emailInput="ngModel" required email>
         <input type="password" placeholder="Password" ngModel id="login-input" #passwordInput="ngModel" required>

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const postRoutes = require("./routes/posts");
 const contactRoutes = require("./routes/contacts");
 const commentRoutes = require("./routes/comments");
+const userRoutes = require("./routes/user")
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/test")
@@ -40,5 +41,6 @@ app.use((req, res, next) => {
 app.use("/api/posts", postRoutes);
 app.use("/contact", contactRoutes);
 app.use("/comment", commentRoutes);
+app.use("/user", userRoutes);
 
 module.exports = app;
