@@ -16,6 +16,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EditPostComponent } from './home/edit-post/edit-post.component';
 import { MyPostsComponent } from './account/my-posts/my-posts.component';
 import { AccountComponent } from './account/account.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AccountComponent } from './account/account.component';
     EditPostComponent,
     MyPostsComponent,
     AccountComponent,
-
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
