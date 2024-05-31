@@ -41,7 +41,12 @@ router.put("/:id",  checkAuth, (req, res) => {
         user_id: req.body.user_id
     });;  
     Post.updateOne({_id: req.params.id, user_id: req.userData.userId}, post).then((result) => {
-        res.status(200).json({message: "Post updated! "});
+        if (result.modifiedCount > 0) {
+            res.status(200).json({message: "Post updated! "});
+        } else {
+            res.status(401).json({message: "Not Authorized to Edit"});
+        }
+        
     });
     console.log(post);
 });
@@ -57,8 +62,12 @@ router.patch("/:id",  checkAuth, (req, res) => {
 
 router.delete("",  checkAuth, (req, res) => {
     const id = req.body._id;
-    Post.deleteOne({_id: id }).then((result) => {
-        res.status(200).json({message: "Post Deleted"});
+    Post.deleteOne({_id: id, user_id: req.userData.userId}).then((result) => {
+        if (result.deleteCount > 0) {
+            res.status(200).json({message:  "Post Deleted"});
+        } else {
+            res.status(401).json({message: "Not Authorized to Delete"});
+        }        
     });
 });
 
