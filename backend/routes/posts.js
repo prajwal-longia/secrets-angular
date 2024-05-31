@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
+var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get("", checkAuth, (req,res) => {
     Post.find().then((documents) => {
@@ -10,7 +11,16 @@ router.get("", checkAuth, (req,res) => {
 });
 
 router.get("/:id",  checkAuth, (req, res) => {
-    Post.findById(req.params.id).then((post) => {
+    if(!(req.params.id).match(/^[0-9a-fA-F]{24}$/)){
+        res.status(404).json({message: "Post Not Found"});
+        return;
+    }
+    const newId = new ObjectId(req.params.id);
+    if(!newId){
+        res.status(404).json({message: "Post Not Found"});
+        return;
+    }
+    Post.findById(newId).then((post) => {
         if(post) {
             res.status(200).json(post);
         } else {
