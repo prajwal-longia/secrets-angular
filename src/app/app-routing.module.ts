@@ -12,6 +12,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { LoginGuard } from './auth/login.guard';
 
 const routes: Routes = [{
   path: 'compose',
@@ -43,11 +44,13 @@ const routes: Routes = [{
 },
 {
   path: 'signup',
-  component: SignupComponent
+  component: SignupComponent,
+  canActivate: [LoginGuard]
 },
 {
   path: 'login',
-  component: LoginComponent
+  component: LoginComponent,
+  canActivate: [LoginGuard]
 },
 {
   path: 'home',
@@ -67,7 +70,7 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, LoginGuard]
 })
 
 export class AppRoutingModule { }
