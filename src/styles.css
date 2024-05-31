@@ -91,6 +91,14 @@
     line-height: 1.35em;
     white-space: pre-wrap;
   }
+
+  .not-found{
+    font-size: 2em;
+  }
+
+  .not-found h3{
+    margin: 0 100px 0 100px;
+  }
   
   .login-box {
     background-color: #18181a;

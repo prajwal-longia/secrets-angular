@@ -11,6 +11,7 @@ import { MyPostsComponent } from './account/my-posts/my-posts.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [{
   path: 'compose',
@@ -56,6 +57,10 @@ const routes: Routes = [{
 {
   path: '',
   component: DefaultComponent
+},
+{
+  path: "**",
+  component: NotfoundComponent
 }
 ];
 

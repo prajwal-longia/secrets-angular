@@ -19,6 +19,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     AccountComponent,
     LoginComponent,
     SignupComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
