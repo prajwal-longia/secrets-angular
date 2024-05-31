@@ -10,10 +10,12 @@ import { EditPostComponent } from './home/edit-post/edit-post.component';
 import { MyPostsComponent } from './account/my-posts/my-posts.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [{
   path: 'compose',
-  component: ComposeComponent
+  component: ComposeComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'contact',
@@ -25,15 +27,18 @@ const routes: Routes = [{
 },
 {
   path: 'my-account/my-posts',
-  component: MyPostsComponent
+  component: MyPostsComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'posts/:postId',
-  component: PostComponent
+  component: PostComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'edit/:postId',
-  component: EditPostComponent
+  component: EditPostComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'signup',
@@ -45,7 +50,8 @@ const routes: Routes = [{
 },
 {
   path: 'home',
-  component: HomeComponent
+  component: HomeComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: '',
@@ -55,7 +61,8 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 
 export class AppRoutingModule { }
