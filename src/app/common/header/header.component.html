@@ -5,12 +5,11 @@
       <li id="compose" class="hideOnMobile" *ngIf="userIsAuthenticated"><a href="/compose">COMPOSE</a></li>
       <li id="about" class="hideOnMobile"><a href="/about">ABOUT ME</a></li>  
       <li id="contact" class="hideOnMobile"><a href="/contact">CONTACT US</a></li>
-      <li id="account" class="hideOnMobile" *ngIf="userIsAuthenticated"><a (click)="onLogout()">LOGOUT</a>
-        <!-- <ul class=".submenu">
-          <li>MY POSTS</li>
-          <li>NOTIFICATIONS</li>
-          <li>LOGOUT</li>
-        </ul> -->
+      <li id="account" class="hideOnMobile" *ngIf="userIsAuthenticated"><a >MY ACCOUNT</a>
+        <ul class="submenu" >
+          <li class="not hideOnMobile" ><a>MY POSTS</a></li>
+          <li class="hideOnMobile"><a (click)="onLogout()">LOGOUT</a></li>
+        </ul>
       </li>
       <li id="button" class="menu-button" (click)=showSidebar()><a [routerLink]=""><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
     </ul>

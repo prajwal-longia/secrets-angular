@@ -497,7 +497,7 @@
     color: #1abc9c;
   }
   
-  nav li:first-child{
+  nav li:not(.not):first-child{
     margin-right: auto;
     font-size: 1.7em;
   }
@@ -507,29 +507,30 @@
     margin-left: 20px;
   }
   
-  nav li:first-child a:hover{
+  nav li:not(.not):first-child a:hover{
     color: #b6b5b2;
   }
 
   nav ul .submenu{
     position: absolute;
-    width: 200px;
+    width: 165px;
     background-color: #1d1d1f;
     box-shadow: 3px 3px 5px rgba(197, 197, 197, 0.05);
     margin-top: -50px;
     opacity: 0;
     z-index: -99%;
-    transition: all ease 0.2s;   
+    transition: all ease 0.2s; 
+    display: block; 
   }
 
-  nav ul li:hover submenu{
+  nav ul li:hover .submenu{
     z-index: 99;
     opacity: 1;
     margin-top: 0;
   }
 
-  nav ul .submenu li a{
-    padding: 15px 20px;
+  nav ul .submenu li{
+    padding: 5px 10px;
   }
   
   .sidebar {
