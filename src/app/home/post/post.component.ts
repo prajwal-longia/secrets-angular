@@ -10,7 +10,7 @@ import { Comment } from '../comment.model';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit, OnDestroy {
-  public post: Post = { _id: "", title: "", content: "", likes: null };
+  public post: Post = { _id: "", title: "", content: "", likes: null, user_id: null };
   public postId: string;
   public postLikes: number;
   upButton: boolean;
@@ -32,7 +32,8 @@ export class PostComponent implements OnInit, OnDestroy {
             _id: postData._id,
             title: postData.title,
             content: postData.content,
-            likes: postData.likes
+            likes: postData.likes,
+            user_id: postData.user_id
           };
           this.postLikes = this.post.likes;
           this.likeUpdated = this.postLikes;

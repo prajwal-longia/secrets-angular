@@ -11,7 +11,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class EditPostComponent implements OnInit {
   postId: string = null;
-  post: Post = { _id: "", title: "", content: "", likes: null };
+  post: Post = { _id: "", title: "", content: "", likes: null, user_id: null };
 
   constructor(public postService: PostService, public route: ActivatedRoute) { }
 
@@ -24,7 +24,8 @@ export class EditPostComponent implements OnInit {
             _id: postData._id,
             title: postData.title,
             content: postData.content,
-            likes: postData.likes
+            likes: postData.likes,
+            user_id: postData.user_id
           };
         });
       }
@@ -40,7 +41,8 @@ export class EditPostComponent implements OnInit {
       _id: this.postId,
       title: form.value.title,
       content: form.value.content,
-      likes: this.post.likes
+      likes: this.post.likes,
+      user_id: this.post.user_id
     };
     this.postService.updatePost(updatedPost);
   }

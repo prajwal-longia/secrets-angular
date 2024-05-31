@@ -24,6 +24,7 @@ router.post("", checkAuth, (req,res) => {
         title: req.body.title,
         content: req.body.content,
         likes: req.body.likes,
+        user_id: req.userData.userId
     });
     console.log(post);
     post.save();
@@ -36,9 +37,10 @@ router.put("/:id",  checkAuth, (req, res) => {
         _id: req.body._id,
         title: req.body.title,
         content: req.body.content,
-        likes: req.body.likes
+        likes: req.body.likes,
+        user_id: req.body.user_id
     });;  
-    Post.updateOne({_id: req.params.id}, post).then((result) => {
+    Post.updateOne({_id: req.params.id, user_id: req.userData.userId}, post).then((result) => {
         res.status(200).json({message: "Post updated! "});
     });
     console.log(post);

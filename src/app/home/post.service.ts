@@ -22,7 +22,8 @@ export class PostService {
                         _id: post._id,
                         title: post.title,
                         content: post.content,
-                        likes: post.likes
+                        likes: post.likes,
+                        user_id: post.user_id
                     };
                 });
             }))
@@ -50,7 +51,8 @@ export class PostService {
             _id: _id,
             title: title,
             content: content,
-            likes: likes
+            likes: likes,
+            user_id: null
         };
         this.http.patch<{ message: string }>(`http://localhost:3000/api/posts/${_id}`, post)
             .subscribe(response => {
@@ -72,6 +74,7 @@ export class PostService {
             title: title,
             content: content,
             likes: likes,
+            user_id: null
         };
         this.http.post<{ message: string, _id: string }>(`http://localhost:3000/api/posts`, post)
             .subscribe(responseData => {
