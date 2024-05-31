@@ -8,11 +8,16 @@ import { Subject, tap } from "rxjs";
 export class AuthService {
     private token: string;
     private authStatusListener = new Subject<boolean>();
+    private isAutheticated: boolean = false;
 
     constructor(public http: HttpClient, public router: Router) { }
 
     getToken() {
         return this.token;
+    }
+
+    getIsAuth() {
+        return this.isAutheticated;
     }
 
     getAuthStatusListener() {
@@ -39,20 +44,19 @@ export class AuthService {
             .subscribe(response => {
                 const token = response.token;
                 this.token = token;
-                this.authStatusListener.next(true);
-                this.router.navigate(['/home'])
+                if (token) {
+                    this.isAutheticated = true;
+                    this.authStatusListener.next(true);
+                    this.router.navigate(['/home'])
+                }
                 console.log(response);
             })
     }
 
-    /* loginUser(username: string, password: string) {
-        const authData = { username: username, password: password };
-        this.http.post<{ token: string }>("http://localhost:3000/user/login", authData)
-            .pipe(tap((response: any) => {
-                this.token = response.token;
-                console.log(response);
-            })
-            );
-    } */
+    logoutUser() {
+        this.token = null;
+        this.isAutheticated = false;
+        this.authStatusListener.next(false);
+    }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Post } from './post.model';
 import { PostService } from './post.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -17,14 +18,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   upButton: boolean;
   downButton: boolean;
   isShow = true;
+  private authStatusSub: Subscription;
+  userIsAuthenticated = false;
 
-  constructor(public postService: PostService, public cRef: ChangeDetectorRef) { }
+  constructor(public postService: PostService, public cRef: ChangeDetectorRef, private authService: AuthService) { }
 
   ngOnInit() {
     this.postService.getPosts();
     this.postsSub = this.postService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
+      });
+
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
       });
 
     this.upButton = false;

@@ -34,4 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     sidebar.style.display = 'none';
   }
 
+  onLogout() {
+    this.authService.logoutUser();
+  }
+
 }
