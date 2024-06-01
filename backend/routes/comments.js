@@ -28,7 +28,7 @@ router.patch("/:id",  checkAuth, (req,res) => {
     const newComment = req.body.comment;
     Comment.updateOne(
         {story_id: req.params.id},
-        { $push: {cmnts: newComment}}
+        { $push: {cmnts: newComment}, $inc: { cmnt_cnt: 1 } }
     ).then((result) => {
         res.status(200).json({message: "Comment added!"})
     });
