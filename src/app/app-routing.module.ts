@@ -59,7 +59,8 @@ const routes: Routes = [{
 },
 {
   path: '',
-  component: DefaultComponent
+  component: DefaultComponent,
+  canActivate: [LoginGuard]
 },
 {
   path: "**",
