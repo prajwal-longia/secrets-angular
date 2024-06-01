@@ -29,6 +29,7 @@ router.get("/:id",  checkAuth, (req, res) => {
     });
 });
 
+
 router.post("", checkAuth, (req,res) => {
     const post = new Post({
         title: req.body.title,

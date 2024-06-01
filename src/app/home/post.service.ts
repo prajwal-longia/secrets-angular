@@ -10,6 +10,8 @@ import { Comment } from "./comment.model";
 export class PostService {
     private posts: Post[] = [];
     private postsUpdated = new Subject<Post[]>();
+    private myposts: Post[] = [];
+    private mypostsUpdated = new Subject<Post[]>();
     story_id: string = "";
 
     constructor(private http: HttpClient, private router: Router) { }
@@ -148,6 +150,29 @@ export class PostService {
             .subscribe(responseData => {
                 console.log(responseData.message);
             })
+    }
+
+    getMyPosts() {
+        this.http.get<{ message: string, posts: Post[] }>(`http://localhost:3000/user/myposts`)
+            .pipe(map((postData) => {
+                return postData.posts.map(post => {
+                    return {
+                        _id: post._id,
+                        title: post.title,
+                        content: post.content,
+                        likes: post.likes,
+                        user_id: post.user_id
+                    };
+                });
+            }))
+            .subscribe((transformedData) => {
+                this.myposts = transformedData;
+                this.mypostsUpdated.next([...this.myposts]);
+            });
+    }
+
+    getMyPostUpdateListener() {
+        return this.mypostsUpdated.asObservable();
     }
 
 

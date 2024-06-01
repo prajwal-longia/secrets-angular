@@ -19,8 +19,8 @@ export class MyPostsComponent {
   constructor(public postService: PostService, public cRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.postService.getPosts();
-    this.postsSub = this.postService.getPostUpdateListener()
+    this.postService.getMyPosts();
+    this.postsSub = this.postService.getMyPostUpdateListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
       });
@@ -75,5 +75,8 @@ export class MyPostsComponent {
     console.log("hell");
   }
 
+  onDeletePost(deletePost: Post) {
+    this.postService.deletePost(deletePost);
+  }
 
 }

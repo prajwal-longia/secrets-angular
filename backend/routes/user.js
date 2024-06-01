@@ -3,8 +3,8 @@ const User = require("../models/user");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
-
 
 
 router.post("/signup", (req,res) => {
@@ -62,12 +62,14 @@ router.post("/login", (req,res,next) => {
     });
 });
 
-router.get("/posts",  checkAuth, (req, res) => {
-    User.find({user_id: req.body.username}).then((post) => {
-        if(post) {
-            res.status(200).json(post);
+router.get("/myposts",  checkAuth, (req, res) => {
+    console.log(req.userData);
+    Post.find({user_id: req.userData.userId}).then((documents) => {
+        console.log(documents);
+        if(documents) {
+            res.status(200).json({message: "Successful", posts: documents});
         } else {
-            res.status(404).json({message: "Post Not Found"});
+            res.status(404).json({message: "Post NoFound"});
         }
     });
 });
