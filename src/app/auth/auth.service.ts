@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { AuthData } from "./auth-data.model";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
   private userId: string;
   private authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   getToken() {
     return this.token;
@@ -40,13 +41,14 @@ export class AuthService {
       .post<{ message: string, result: any }>("http://localhost:3000/user/signup", authData)
       .subscribe(response => {
         console.log(response);
+        this.toastr.success(response.message);
         this.router.navigate(["login"]);
       });
   }
 
   loginUser(username: string, password: string) {
     const authData = { username: username, password: password };
-    this.http.post<{ token: string, expiresIn: number, userId: string }>("http://localhost:3000/user/login", authData)
+    this.http.post<{ token: string, expiresIn: number, userId: string, message: string }>("http://localhost:3000/user/login", authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -60,6 +62,7 @@ export class AuthService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           console.log(expirationDate);
           this.saveAuthData(token, expirationDate, this.userId);
+          this.toastr.success(response.message);
           this.router.navigate(["home"]);
         }
       });
@@ -88,6 +91,7 @@ export class AuthService {
     this.userId = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
+    this.toastr.success("Logged Out");
     this.router.navigate(["login"]);
   }
 

@@ -74,7 +74,8 @@ router.patch("/:id",  checkAuth, (req, res) => {
 router.delete("",  checkAuth, (req, res) => {
     const id = req.body._id;
     Post.deleteOne({_id: id, user_id: req.userData.userId}).then((result) => {
-        if (result.deleteCount > 0) {
+        console.log(result);
+        if (result.deletedCount > 0) {
             res.status(200).json({message:  "Post Deleted"});
         } else {
             res.status(401).json({message: "Not Authorized to Delete"});

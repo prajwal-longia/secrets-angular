@@ -33,7 +33,6 @@ router.post("/login", (req,res,next) => {
     let fetchedUser;
     User.findOne({username: req.body.username})
     .then(user => {
-        console.log(user);
         if (!user){
             return res.status(401).json({
                 message: "Auth Failed"
@@ -53,7 +52,7 @@ router.post("/login", (req,res,next) => {
             userId: fetchedUser._id}, 
             'this_is_the_hash', 
             {expiresIn: "1h"});
-        res.status(200).json({token: token, expiresIn: 3600, userId: fetchedUser._id});
+        res.status(200).json({token: token, expiresIn: 3600, userId: fetchedUser._id, message:"Login Succesful"});
     })
     .catch(err => {
         return res.status(401).json({

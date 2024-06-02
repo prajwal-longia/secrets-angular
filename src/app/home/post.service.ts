@@ -4,7 +4,7 @@ import { Subject, map } from "rxjs";
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router } from "@angular/router";
 import { Comment } from "./comment.model";
-
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({ providedIn: "root" })
 export class PostService {
@@ -14,7 +14,7 @@ export class PostService {
     private mypostsUpdated = new Subject<Post[]>();
     story_id: string = "";
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
     getPosts() {
         this.http.get<{ message: string, posts: Post[] }>('http://localhost:3000/api/posts')
@@ -85,6 +85,7 @@ export class PostService {
                 this.addCommentArray();
                 this.posts.push(post);
                 this.postsUpdated.next([...this.posts]);
+                this.toastr.success(responseData.message);
                 this.router.navigate([`/posts/${responseData._id}`])
             });
 
@@ -96,7 +97,8 @@ export class PostService {
         this.http.put<{ message: string }>(`http://localhost:3000/api/posts/${post._id}`, updatedPost)
             .subscribe(responseData => {
                 console.log(responseData.message);
-                this.router.navigate([`/posts/${post._id}`])
+                this.toastr.success(responseData.message);
+                this.router.navigate([`/posts/${post._id}`]);
             })
     }
 
@@ -112,6 +114,7 @@ export class PostService {
         this.http.delete<{ message: string }>(`http://localhost:3000/api/posts/`, options)
             .subscribe(response => {
                 console.log(response.message);
+                this.toastr.success(response.message);
             });
         this.deleteCommentArray(delPost._id);
     }
