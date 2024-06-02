@@ -2,8 +2,8 @@
     margin: 0;
     padding: 0;
   }
-  
-  
+
+  @import 'ngx-toastr/toastr';
   
   body {
     min-height: 100vh;
@@ -532,6 +532,12 @@
   nav ul .submenu li{
     padding: 5px 10px;
   }
+
+  .toast-container>div{
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
   
   .sidebar {
     position: fixed;
